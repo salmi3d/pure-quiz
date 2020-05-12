@@ -95,16 +95,12 @@ body {
   text-transform: uppercase;
   font-weight: bold;
   font-size: 14px;
+  margin-right: 10px;
   &:focus {
     outline: none;
   }
   &:active {
     box-shadow: inset 2px 2px 1px rgba(0, 0, 0, 0.3);
-  }
-  &:disabled {
-    background: #ccc;
-    color: #000;
-    cursor: not-allowed;
   }
   &.fail {
     background: rgba(240, 90, 110, $alpha: 1);
@@ -116,8 +112,10 @@ body {
     background: #4d0c6f;
     color: #fff;
   }
-  & + & {
-    margin-left: 10px;
+  &:disabled {
+    background-color: #ccc;
+    color: #000;
+    cursor: not-allowed;
   }
 }
 .menu-toggle {
@@ -164,8 +162,10 @@ body {
         background: #fff;
         padding: 0 20px 10px 20px;
         transition: opacity 0.3s;
-        &:hover {
+        &:hover,
+        &.active {
           opacity: 0.7;
+          text-decoration: underline;
         }
       }
     }
@@ -179,4 +179,151 @@ body {
   right: 0;
   z-index: 50;
   background: rgba(0, 0, 0, 0.7);
+}
+.quiz-list {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+  padding-top: 100px;
+  width: 100%;
+  background: linear-gradient(to right, #b92b27, #1565c0);
+  h1 {
+    color: #fff;
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    li {
+      margin-bottom: 10px;
+      a {
+        text-decoration: none;
+        color: #fff;
+        &:hover {
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+}
+.auth {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+  padding-top: 100px;
+  width: 100%;
+  background: linear-gradient(to right, #f12711, #f5af19);
+  > div {
+    width: 100%;
+    max-width: 800px;
+    padding: 0 20px;
+  }
+  h1 {
+    color: #fff;
+    text-align: center;
+  }
+  form {
+    background: rgba($color: #eee, $alpha: 0.5);
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    border-radius: 4px;
+  }
+}
+.input-element {
+  margin-bottom: 15px;
+  label {
+    margin-bottom: 3px;
+    padding: 0;
+    display: block;
+    font-weight: bold;
+  }
+  input {
+    display: block;
+    border: 1px solid #bbb;
+    padding: 5px;
+    margin-bottom: 5px;
+    width: 100%;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+  }
+  span {
+    color: #f12711;
+    font-size: 13px;
+    font-weight: bold;
+  }
+  &.invalid {
+    color: #f12711;
+  }
+}
+.quiz-builder {
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+  flex-grow: 1;
+  width: 100%;
+  background: linear-gradient(to right, #11998e, #38ef7d);
+  > div {
+    width: 100%;
+    max-width: 800px;
+    padding: 0 20px;
+  }
+  h1 {
+    text-align: center;
+  }
+  form {
+    background: rgba($color: #eee, $alpha: 0.5);
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 4px;
+  }
+}
+.select {
+  margin-bottom: 15px;
+  label {
+    margin-bottom: 3px;
+    padding: 0;
+    display: block;
+    font-weight: bold;
+  }
+  select {
+    display: block;
+    border: 1px solid #bbb;
+    margin-bottom: 5px;
+    padding: 3px;
+    width: 100%;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+  }
+}
+.loader {
+  display: block;
+  position: relative;
+  margin: 0 auto;
+  width: 80px;
+  height: 80px;
+  &:after {
+    content: ' ';
+    display: block;
+    border-radius: 50%;
+    width: 0;
+    height: 0;
+    margin: 8px;
+    box-sizing: border-box;
+    border: 32px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: lds-hourglass 1.2s infinite;
+  }
+}
+@keyframes lds-hourglass {
+  0% {
+    transform: rotate(0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+  50% {
+    transform: rotate(900deg);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  100% {
+    transform: rotate(1800deg);
+  }
 }

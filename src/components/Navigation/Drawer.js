@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
 import { Backdrop } from '../UI/Backdrop'
+import { NavLink } from 'react-router-dom'
 
-const links = [1, 2, 3]
+const links = [
+  { to: '/', label: 'Quiz List', exact: true },
+  { to: '/auth', label: 'Authorization', exact: false },
+  { to: '/quiz-builder', label: 'Build a quiz', exact: false },
+]
 
 export default class Drawer extends Component {
 
@@ -9,7 +14,13 @@ export default class Drawer extends Component {
     return links.map((link, idx) => {
       return (
         <li key={idx}>
-          <a>Link {link}</a>
+          <NavLink
+            to={link.to}
+            exact={link.exact}
+            onClick={this.props.onClose}
+          >
+            {link.label}
+          </NavLink>
         </li>
       )
     })
@@ -30,4 +41,5 @@ export default class Drawer extends Component {
       </>
     )
   }
+
 }

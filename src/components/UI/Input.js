@@ -22,7 +22,6 @@ export const Input = props => {
           ? <span>{props.errorMsg || 'Please input correct value'}</span>
           : null
       }
-
     </div>
   )
 }

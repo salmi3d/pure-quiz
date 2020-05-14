@@ -11,7 +11,7 @@ class QuizList extends Component {
       <li
         key={quiz.id}
       >
-        <NavLink to={`/quiz/${quiz.id}`}>{quiz.name}</NavLink>
+        <NavLink to={`/quiz/${quiz.id}`}>{quiz.theme}</NavLink>
       </li>
     ))
   }

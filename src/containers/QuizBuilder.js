@@ -15,8 +15,16 @@ function createOptionControl(n) {
   }, { required: true })
 }
 
-function createFormControls() {
-  return {
+function createFormControls(withTheme = false) {
+  let item = {}
+  if (withTheme) {
+    item.theme = createControl({
+      label: 'Theme',
+      errorMsg: 'Please enter a theme'
+    }, { required: true })
+  }
+  item = {
+    ...item,
     question: createControl({
       label: 'Question',
       errorMsg: 'Please enter a question'
@@ -26,6 +34,8 @@ function createFormControls() {
     option3: createOptionControl(3),
     option4: createOptionControl(4)
   }
+
+  return item
 }
 
 class QuizBuilder extends Component {
@@ -33,15 +43,15 @@ class QuizBuilder extends Component {
   state = {
     rightAnswerId: 1,
     isFormValid: false,
-    formControls: createFormControls()
+    formControls: createFormControls(true)
   }
 
   addQuestionHandler = event => {
     event.preventDefault()
-    const { question, option1, option2, option3, option4 } = this.state.formControls
+    const { theme, question, option1, option2, option3, option4 } = this.state.formControls
     const questionItem = {
       question: question.value,
-      id: this.props.quiz.length + 1,
+      id: this.props.quiz.questions.length + 1,
       rightAnswerId: this.state.rightAnswerId,
       answers: [
         { text: option1.value, id: option1.id },
@@ -49,6 +59,9 @@ class QuizBuilder extends Component {
         { text: option3.value, id: option3.id },
         { text: option4.value, id: option4.id }
       ]
+    }
+    if (theme) {
+      questionItem.theme = theme.value
     }
 
     this.props.createQuizQuestion(questionItem)
@@ -101,7 +114,7 @@ class QuizBuilder extends Component {
             errorMsg={control.errorMsg}
             onChange={event => this.changeHandler(event.target.value, item)}
           />
-          {idx === 0 ? <hr /> : null}
+          {item === 'question' ? <hr /> : null}
         </Auxiliary>
       )
     })
@@ -133,15 +146,15 @@ class QuizBuilder extends Component {
             {this.renderControls()}
             {select}
             <Button
-              type="primary"
+              type="up"
               onClick={this.addQuestionHandler}
               disabled={!this.state.isFormValid}
             >Add Question</Button>
 
             <Button
-              type="success"
+              type="raise"
               onClick={this.addQuizHandler}
-              disabled={this.props.quiz.length === 0}
+              disabled={this.props.quiz.questions.length === 0}
             >Create quiz</Button>
           </form>
         </div>

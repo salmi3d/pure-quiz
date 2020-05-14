@@ -1,5 +1,5 @@
 import axios from 'axios'
 
 export default axios.create({
-  baseURL: 'https://pure-quiz-ec5e8.firebaseio.com'
+  baseURL: process.env.REACT_APP_FIREBASE_BASE_URL
 })

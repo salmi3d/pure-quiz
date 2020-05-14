@@ -7,7 +7,10 @@ import {
 } from '../actions/actionTypes'
 
 const initialState = {
-  quiz: [],
+  quiz: {
+    theme: '',
+    questions: []
+  },
   uploading: false
 }
 
@@ -30,14 +33,21 @@ export const buildReducer = (state = initialState, action) => {
         error: action.error
       }
     case CREATE_QUIZ_QUESTION:
+      const theme = action.item.theme ? action.item.theme : state.quiz.theme
       return {
         ...state,
-        quiz: [...state.quiz, action.item]
+        quiz: {
+          theme,
+          questions: [...state.quiz.questions, action.item]
+        }
       }
     case RESET_QUIZ_CREATION:
       return {
         ...state,
-        quiz: []
+        quiz: {
+          theme: '',
+          questions: []
+        }
       }
     default:
       return state

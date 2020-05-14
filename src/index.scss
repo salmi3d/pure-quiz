@@ -68,7 +68,6 @@ body {
   color: #fff;
   border: 2px solid #fff;
   border-radius: 5px;
-  margin: 0 10px;
   ul {
     list-style: none;
     margin: 0;
@@ -86,30 +85,125 @@ body {
     }
   }
 }
-.button {
-  display: inline-block;
-  padding: 10px 20px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  color: #000;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 14px;
-  margin-right: 10px;
-  &:focus {
-    outline: none;
+// .button {
+//   display: inline-block;
+//   padding: 10px 20px;
+//   border-radius: 4px;
+//   border: 1px solid #ccc;
+//   color: #000;
+//   text-transform: uppercase;
+//   font-weight: bold;
+//   font-size: 14px;
+//   margin-right: 10px;
+//   &:focus {
+//     outline: none;
+//   }
+//   &:active {
+//     box-shadow: inset 2px 2px 1px rgba(0, 0, 0, 0.3);
+//   }
+//   &.fail {
+//     background: rgba(240, 90, 110, $alpha: 1);
+//   }
+//   &.success {
+//     background: rgba(160, 240, 70, $alpha: 1);
+//   }
+//   &.primary {
+//     background: #4d0c6f;
+//     color: #fff;
+//   }
+
+// }
+// Animate the size, inside
+.fill:hover:enabled,
+.fill:focus:enabled {
+  box-shadow: inset 0 0 0 2em var(--hover);
+}
+
+// Animate the size, outside
+.pulse:hover:enabled,
+.pulse:focus:enabled {
+  animation: pulse 1s;
+  box-shadow: 0 0 0 2em rgba(#fff, 0);
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--hover);
   }
-  &:active {
-    box-shadow: inset 2px 2px 1px rgba(0, 0, 0, 0.3);
+}
+
+// Stack multiple shadows, one from the left, the other from the right
+.close:hover:enabled,
+.close:focus:enabled {
+  box-shadow: inset -4.5em 0 0 0 var(--hover), inset 4.5em 0 0 0 var(--hover);
+}
+
+// Size can also be negative; see how it's smaller than the element
+.raise:hover:enabled,
+.raise:focus:enabled {
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  transform: translateY(-0.25em);
+}
+
+// Animating from the bottom
+.up:hover:enabled,
+.up:focus:enabled {
+  box-shadow: inset 0 -3.25em 0 0 var(--hover);
+}
+
+// And from the left
+.slide:hover:enabled,
+.slide:focus:enabled {
+  box-shadow: inset 9.5em 0 0 0 var(--hover);
+}
+
+// Multiple shadows, one on the outside, another on the inside
+.offset {
+  box-shadow: 0.3em 0.3em 0 0 var(--color), inset 0.3em 0.3em 0 0 var(--color);
+
+  &:hover:enabled,
+  &:focus:enabled {
+    box-shadow: 0 0 0 0 var(--hover), inset 6em 3.5em 0 0 var(--hover);
   }
-  &.fail {
-    background: rgba(240, 90, 110, $alpha: 1);
+}
+
+//=== Set button colors
+// If you wonder why use Sass vars or CSS custom properties...
+// Make a map with the class names and matching colors
+$colors: (
+  fill: #6d6875,
+  pulse: #3d5a80,
+  close: #ff7f82,
+  raise: #05668d,
+  up: #003049,
+  slide: #8fc866,
+  offset: #19bc8b,
+);
+
+// Sass variables compile to a static string; CSS variables are dynamic and inherited
+// Loop through the map and set CSS custom properties using Sass variables
+@each $button, $color in $colors {
+  .#{$button} {
+    --color: #{$color};
+    --hover: #{adjust-hue($color, 45deg)};
   }
-  &.success {
-    background: rgba(160, 240, 70, $alpha: 1);
+}
+
+// Now every button will have different colors as set above. We get to use the same structure, only changing the custom properties.
+button {
+  color: var(--color);
+  transition: 0.25s;
+  background: none;
+  border: 2px solid;
+  font: inherit;
+  line-height: 1;
+  padding: 1em 2em;
+  & + & {
+    margin-left: 0.5em;
   }
-  &.primary {
-    background: #4d0c6f;
+  &:hover:enabled,
+  &:focus:enabled {
+    border-color: var(--hover);
     color: #fff;
   }
   &:disabled {
@@ -191,6 +285,7 @@ body {
     color: #fff;
   }
   ul {
+    text-align: center;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -226,7 +321,6 @@ body {
     background: rgba($color: #eee, $alpha: 0.5);
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
     padding: 30px;
-    border-radius: 4px;
   }
 }
 .input-element {
@@ -274,7 +368,6 @@ body {
     background: rgba($color: #eee, $alpha: 0.5);
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
     padding: 20px;
-    border-radius: 4px;
   }
 }
 .select {

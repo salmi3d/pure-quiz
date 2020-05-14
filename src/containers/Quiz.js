@@ -30,10 +30,10 @@ class Quiz extends Component {
                   onRetryClick={this.props.retryQuiz}
                 />
                 : <ActiveQuiz
-                  answers={this.props.quiz[this.props.activeQuestion].answers}
-                  question={this.props.quiz[this.props.activeQuestion].question}
+                  answers={this.props.quiz.questions[this.props.activeQuestion].answers}
+                  question={this.props.quiz.questions[this.props.activeQuestion].question}
                   onAnswerClick={this.props.quizAnswerClick}
-                  quizLength={this.props.quiz.length}
+                  quizLength={this.props.quiz.questions.length}
                   answerNumber={this.props.activeQuestion + 1}
                   state={this.props.answerState}
                 />

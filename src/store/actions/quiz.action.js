@@ -10,17 +10,17 @@ import {
   QUIZ_RETRY
 } from './actionTypes'
 
-const isQuizFinished = state => state.activeQuestion + 1 === state.quiz.length
+const isQuizFinished = state => state.activeQuestion + 1 === state.quiz.questions.length
 
 export const fetchQuizzes = () => async dispatch => {
   dispatch(fetchQuizzesStart())
   try {
     const response = await axios.get('/quizzes.json')
     const quizzes = []
-    Object.keys(response.data).forEach((key, idx) => {
+    Object.keys(response.data).forEach(key => {
       quizzes.push({
         id: key,
-        name: `Quiz #${idx + 1}`
+        theme: response.data[key].theme
       })
     })
     dispatch(fetchQuizzesSuccess(quizzes))
@@ -80,11 +80,12 @@ export const retryQuiz = () => ({
 
 export const quizAnswerClick = answerId => (dispatch, getState) => {
   const state = getState().quiz
+
   if (state.answerState) {
     const key = Object.keys(state.answerState)[0]
     if (state.answerState[key] === 'success') return
   }
-  const question = state.quiz[state.activeQuestion]
+  const question = state.quiz.questions[state.activeQuestion]
   const results = state.results
   if (question.rightAnswerId === answerId) {
     if (!results[question.id]) {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from './UI/Button'
-import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 export const FinishedQuiz = props => {
   const successCount = Object.keys(props.results).reduce((total, key) => {
@@ -8,10 +8,12 @@ export const FinishedQuiz = props => {
     return total
   }, 0)
 
+  const history = useHistory()
+
   return (
     <div className="finished-quiz">
       <ul>
-        {props.quiz.map((quizItem, idx) => {
+        {props.quiz.questions.map((quizItem, idx) => {
           const cls = [
             'fa',
             props.results[quizItem.id] === 'fail'
@@ -30,18 +32,16 @@ export const FinishedQuiz = props => {
           )
         })}
       </ul>
-      <p>Correct {successCount} of {props.quiz.length}</p>
+      <p>Correct {successCount} of {props.quiz.questions.length}</p>
       <div>
         <Button
-          type="primary"
+          type="close"
           onClick={props.onRetryClick}
         >Retry Quiz</Button>
-        <Link to="/">
-          <Button
-            type="success"
-            onClick={null}
-          >Quiz list</Button>
-        </Link>
+        <Button
+          type="slide"
+          onClick={() => history.push('/')}
+        >Quiz list</Button>
       </div>
     </div>
   )

@@ -1,0 +1,6 @@
+{
+  "env": {
+    "REACT_APP_FIREBASE_BASE_URL": "@pure-quiz.firebase_base_url",
+    "REACT_APP_FIREBASE_API_KEY": "@pure-quiz.firebase_api_key"
+  }
+}

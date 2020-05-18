@@ -110,7 +110,7 @@ class Auth extends Component {
     return (
       <div className="auth">
         <div>
-          <h1>Authorization</h1>
+          <h1>Login to account</h1>
           <form onSubmit={this.submitHandler}>
             {this.renderInputs()}
 

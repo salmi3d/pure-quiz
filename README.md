@@ -1,4 +1,19 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 🔠 pure-quiz
+
+Quiz service with authentication and builder based on React, Redux and Firebase
+
+## Demo
+
+Demo lives here: [https://pure-quiz.salmi3d.now.sh](https://pure-quiz.salmi3d.now.sh)
+
+## Setup
+
+```
+cd <project-folder>
+yarn
+rename file .env.example to .env
+edit .env file to your needs
+```
 
 ## Available Scripts
 

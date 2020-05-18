@@ -1,6 +1,6 @@
 # 🔠 pure-quiz
 
-Quiz service with authentication and builder based on React, Redux and Firebase
+Quiz service with authentication and builder is built with React, Redux and Firebase
 
 ## Demo
 

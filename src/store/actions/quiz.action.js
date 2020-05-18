@@ -91,20 +91,18 @@ export const quizAnswerClick = answerId => (dispatch, getState) => {
     if (!results[question.id]) {
       results[question.id] = 'success'
     }
-
     dispatch(quizSetState({ [answerId]: 'success' }, results))
-
-    const timeout = window.setTimeout(() => {
-      if (isQuizFinished(state)) {
-        dispatch(finishQuiz())
-      } else {
-        dispatch(quizNextQuestion(state.activeQuestion + 1))
-      }
-      window.clearTimeout(timeout)
-    }, 500)
   } else {
     results[question.id] = 'fail'
     dispatch(quizSetState({ [answerId]: 'fail' }, results))
   }
+  const timeout = window.setTimeout(() => {
+    if (isQuizFinished(state)) {
+      dispatch(finishQuiz())
+    } else {
+      dispatch(quizNextQuestion(state.activeQuestion + 1))
+    }
+    window.clearTimeout(timeout)
+  }, 500)
 }
 
